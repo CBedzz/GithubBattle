@@ -6,6 +6,7 @@ import {
 	FaTrophy,
 	FaTimesCircle,
 } from 'react-icons/fa'
+import Results from './Results'
 
 function Instructions() {
 	return (
@@ -126,6 +127,7 @@ export default class Battle extends React.Component {
 		this.state = {
 			playerOne: null,
 			playerTwo: null,
+			battle: false,
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -145,40 +147,53 @@ export default class Battle extends React.Component {
 	}
 
 	render() {
-		const { playerOne, playerTwo } = this.state
-		return (
-			<React.Fragment>
-				<Instructions />
-				<div className='players-container'>
-					<h1 className='center-text header-lg'>Players</h1>
-					<div className='row space-around'>
-						{playerOne === null ? (
-							<PlayerInput
-								label='Player One'
-								onSubmit={(player) => this.handleSubmit('playerOne', player)}
-							/>
-						) : (
-							<PlayerPreview
-								username={playerOne}
-								label='Player One'
-								onReset={() => this.handleReset('playerOne')}
-							/>
-						)}
-						{playerTwo === null ? (
-							<PlayerInput
-								label='Player Two'
-								onSubmit={(player) => this.handleSubmit('playerTwo', player)}
-							/>
-						) : (
-							<PlayerPreview
-								username={playerTwo}
-								label='Player Two'
-								onReset={() => this.handleReset('playerTwo')}
-							/>
+		const { playerOne, playerTwo, battle } = this.state
+
+		if (battle) {
+			return <Results playerOne={playerOne} playerTwo={playerTwo} />
+		} else
+			return (
+				<React.Fragment>
+					<Instructions />
+					<div className='players-container'>
+						<h1 className='center-text header-lg'>Players</h1>
+						<div className='row space-around'>
+							{playerOne === null ? (
+								<PlayerInput
+									label='Player One'
+									onSubmit={(player) => this.handleSubmit('playerOne', player)}
+								/>
+							) : (
+								<PlayerPreview
+									username={playerOne}
+									label='Player One'
+									onReset={() => this.handleReset('playerOne')}
+								/>
+							)}
+							{playerTwo === null ? (
+								<PlayerInput
+									label='Player Two'
+									onSubmit={(player) => this.handleSubmit('playerTwo', player)}
+								/>
+							) : (
+								<PlayerPreview
+									username={playerTwo}
+									label='Player Two'
+									onReset={() => this.handleReset('playerTwo')}
+								/>
+							)}
+						</div>
+
+						{playerOne && playerTwo && (
+							<button
+								className='btn dark-btn btn-space'
+								onClick={() => this.setState({ battle: true })}
+							>
+								Battle
+							</button>
 						)}
 					</div>
-				</div>
-			</React.Fragment>
-		)
+				</React.Fragment>
+			)
 	}
 }
