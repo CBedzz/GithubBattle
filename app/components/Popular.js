@@ -18,7 +18,8 @@ function LanguagesNav({ selected, onUpdateLanguage }) {
 					<button
 						className='btn-clear nav-link'
 						style={language === selected ? { color: 'rgb(187, 46, 31)' } : null}
-						onClick={() => onUpdateLanguage(language)}>
+						onClick={() => onUpdateLanguage(language)}
+					>
 						{language}
 					</button>
 				</li>
@@ -47,7 +48,7 @@ function ReposGrid({ repos }) {
 				const { login, avatar_url } = owner
 
 				return (
-					<li key={html_url} className='repo bg-light'>
+					<li key={html_url} className='card bg-light'>
 						<h4 className='header-lg center-text'>#{index + 1}</h4>
 						<img
 							className='avatar'
@@ -146,7 +147,7 @@ export default class Popular extends React.Component {
 
 				{this.isLoading() && <p>LOADING</p>}
 
-				{error && <p>{error}</p>}
+				{error && <p className='center-text error'>{error}</p>}
 
 				{repos[selectedLanguage] && (
 					<ReposGrid repos={repos[selectedLanguage]} />
