@@ -1,3 +1,7 @@
+//
+//  NO longer needed to due Hover component and render props
+//
+
 import React from 'react'
 
 export default function withHover(Component, propName = 'hovering') {
