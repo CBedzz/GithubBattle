@@ -21,7 +21,10 @@ module.exports = {
 			template: 'app/index.html',
 		}),
 		new CopyPlugin([
-			{ from: '_redirects', to: path.resolve(__dirname, 'dist') },
+			{
+				from: path.resolve(__dirname, '_redirects'),
+				to: path.resolve(__dirname, 'dist'),
+			},
 		]),
 	],
 	devServer: {
