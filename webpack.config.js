@@ -20,7 +20,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'app/index.html',
 		}),
-		new CopyPlugin([{ from: '_redirects' }]),
+		new CopyPlugin([
+			{ from: '_redirects', to: path.resolve(__dirname, 'dist') },
+		]),
 	],
 	devServer: {
 		historyApiFallback: true,
